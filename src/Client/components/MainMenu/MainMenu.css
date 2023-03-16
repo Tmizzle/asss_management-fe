@@ -1,0 +1,57 @@
+.buttons{
+    position: relative;
+    margin: 10px 10px 10px 10px;
+    border-radius: 20px;
+    width: 120px;
+    background-color: #53c0a2;
+    text-align: center;
+    color: white !important;
+    border: none;
+}
+
+.buttons:hover{
+    border-color: #818182;
+    background-color: #818182;
+    border: 0px;
+    
+}
+
+
+.nav-link{
+    color: white !important;
+}
+
+
+
+.nav-link:hover{
+    border: none;
+    color: #fff;
+}
+
+.userInfo{
+    margin: 10px 20px 10px 20px;
+    position: relative;
+    top: 20px;
+    
+
+}
+.nav-tabs{
+    background-color: white;
+    justify-content: center;
+    display: flex;
+}
+
+.navBar{
+    background-color: #b5f7e6;
+    border-color: #b5f7e6;
+}
+.logouticon{
+    width: 2rem;
+    height: 2rem;
+    margin: 10px 10px 10px 10px;
+    position: relative;
+}
+.logouticon:hover{
+    border: none;
+    color: grey;
+}
