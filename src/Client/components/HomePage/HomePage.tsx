@@ -1,10 +1,9 @@
 import React from "react";
-import { Card, Container } from "react-bootstrap";
 import { MainMenu, MainMenuItem } from "../MainMenu/MainMenu";
 
 
 const menuItems = [
-    new MainMenuItem("Button", "")
+    new MainMenuItem("My Profile", "/MyProfilePage")
   ];
 
 

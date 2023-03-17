@@ -1,6 +1,7 @@
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { useToken } from "../../context/TokenContext/TokenProvider";
 import { HomePage } from "../HomePage/HomePage";
+import MyProfilePage from "../MyProfilePage/MyProfilePage";
 import UserLoginPage from "../UserLoginPage/UserLoginPage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -16,6 +17,7 @@ function Router() {
                 <Switch>
                     <Route exact path="/" component={ UserLoginPage }  />
                     <PrivateRoute exact path="/homePage" component={ HomePage }  />
+                    <PrivateRoute exact path="/MyProfilePage" component={ MyProfilePage }  />
                     </Switch>
             </HashRouter>
         </>

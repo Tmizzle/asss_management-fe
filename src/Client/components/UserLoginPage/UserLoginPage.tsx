@@ -16,7 +16,7 @@ export default function UserLoginPage() {
     /* useStates pick up values from fields in our form */
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { token, setToken } = useToken();
+    const { setToken } = useToken();
     const history = useHistory()
 
 
@@ -46,9 +46,6 @@ export default function UserLoginPage() {
                     console.log(data.token);
                     history.push("/homePage")
                 })
-            }
-            else if(res.status === 400){
-                console.log("Wrong Input");
             }
             })
             .catch(error => {
