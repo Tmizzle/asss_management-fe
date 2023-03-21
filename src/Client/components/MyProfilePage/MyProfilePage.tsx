@@ -28,23 +28,18 @@ export default function MyProfilePage() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchUser = async () => {
-      const reactData = [localStorage.getItem("token")];
-      const url = `http://localhost:8080/api/employee/?token=${reactData}`;
+      const reactData = localStorage.getItem("token"); // Get the token as a string
+      const url = `http://localhost:8080/api/employee/getEmployeeByEmail/?token=${reactData}`;
       const response = await fetch(url);
       const data = await response.json();
-      setUser(data[0]);
+      setUser(data);
       setIsLoading(false);
-      console.log(data);
     };
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    console.log(user); // log user when it changes
-  }, [user]);
-
   const update = () => {
-    const url = `http://localhost:8080/api/employee/${user.id}?firstName=${user.firstName}&lastName=${user.lastName}&middleName=${user.middleName}&email=${user.email}`;
+    const url = `http://localhost:8080/api/employee/${reactData}?firstName=${user.firstName}&lastName=${user.lastName}&middleName=${user.middleName}&email=${user.email}`;
 fetch(url, {
 method: "PUT",
 headers: {

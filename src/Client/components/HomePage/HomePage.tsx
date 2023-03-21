@@ -8,6 +8,7 @@ const menuItems = [
 
 
   export class HomePage extends React.Component {
+    
     render() {
         return (
             <><MainMenu items={menuItems}></MainMenu>

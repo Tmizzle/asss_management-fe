@@ -7,11 +7,6 @@ import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { useToken } from '../../context/TokenContext/TokenProvider';
 import { Link, useHistory } from 'react-router-dom';
 
-interface UserLoginPageState {
-    email: string;
-    password: string;
-}
-
 export default function UserLoginPage() {
     /* useStates pick up values from fields in our form */
     const [email, setEmail] = useState("");
@@ -25,12 +20,16 @@ export default function UserLoginPage() {
     }
     /* doLogin sends body data to Backend function, converts it to json beforehand  */
     const doLogin = () => {
-        const url = `http://localhost:8080/api/login/?email=${email}&password=${password}`;
+        const url = `http://localhost:8080/api/public/login/authenticate`;
     fetch(url, {
     method: "POST",
     headers: {
       "Content-type": "application/json"
-    }
+    },
+    body: JSON.stringify({
+        email: email,
+        password: password
+    })
 
             /* .then Works with res which is return data from backend and tells us if login was sucessful
             stores then token in LocalStorate
@@ -38,12 +37,10 @@ export default function UserLoginPage() {
              */
         }).then((res) => 
             {
-                console.log(res);
                 if(res.status === 200){
                 res.json().then((data) => {
                     localStorage.setItem("token", data.token)
                     setToken(data.token)
-                    console.log(data.token);
                     history.push("/homePage")
                 })
             }
