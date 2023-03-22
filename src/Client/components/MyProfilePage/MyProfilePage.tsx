@@ -10,7 +10,7 @@ const menuItems = [
 ];
 
 export default function MyProfilePage() {
-  const reactData = [localStorage.getItem("token")];
+  const reactData = localStorage.getItem("token");
   const [isDisabled, setIsDisabled] = useState(true);
   
   const [user, setUser] = useState({id: 0,
@@ -27,14 +27,20 @@ export default function MyProfilePage() {
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    const url = `http://localhost:8080/api/employee/getEmployeeByEmail/?token=${reactData}`;
     const fetchUser = async () => {
-      const reactData = localStorage.getItem("token"); // Get the token as a string
-      const url = `http://localhost:8080/api/employee/getEmployeeByEmail/?token=${reactData}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setUser(data);
-      setIsLoading(false);
-    };
+      fetch(url, {
+        headers: {
+          "Authorization": "Bearer " + reactData
+        }
+            }).then((response) => response.json())
+              .then((actualData) => {
+              console.log(actualData);
+              setUser(actualData);
+            }).catch(error => {
+                    console.log(error);
+                  });
+                }
     fetchUser();
   }, []);
 
@@ -43,7 +49,7 @@ export default function MyProfilePage() {
 fetch(url, {
 method: "PUT",
 headers: {
-  "Content-type": "application/json"
+  "Authorization": "bearer " + reactData
 }
     }).then((res) => 
         {
