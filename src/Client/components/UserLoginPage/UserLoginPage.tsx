@@ -39,9 +39,18 @@ export default function UserLoginPage() {
             {
                 if(res.status === 200){
                 res.json().then((data) => {
+                    if(data.role === "[PROFESOR]"){
                     localStorage.setItem("token", data.token)
+                    localStorage.setItem("role", data.role)
                     setToken(data.token)
                     history.push("/homePage")
+                }
+                else if(data.role === "[STUDENT]"){
+                        localStorage.setItem("token", data.token)
+                        localStorage.setItem("role", data.role)
+                        setToken(data.token)
+                        history.push("/homePage")
+                }
                 })
             }
             })

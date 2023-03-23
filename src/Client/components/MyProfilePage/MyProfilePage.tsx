@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { MainMenu, MainMenuItem } from "../MainMenu/MainMenu";
 import "./MyProfilePage.css";
 import { faCheck, faPen } from "@fortawesome/free-solid-svg-icons";
+import { Link, useHistory } from 'react-router-dom';
 
 const menuItems = [
   new MainMenuItem("Home", "/homePage/"),
@@ -12,6 +13,7 @@ const menuItems = [
 export default function MyProfilePage() {
   const reactData = localStorage.getItem("token");
   const [isDisabled, setIsDisabled] = useState(true);
+  const history = useHistory()
   
   const [user, setUser] = useState({id: 0,
     firstName: "",
@@ -24,6 +26,7 @@ export default function MyProfilePage() {
     createdAt: "",
     employeeCategory: ""
     });
+
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -43,13 +46,23 @@ export default function MyProfilePage() {
                 }
     fetchUser();
   }, []);
+  useEffect(() => {
+    const checkRole = async () => {
+      const role = localStorage.getItem("role");
+      if (role !== "[PROFESOR]"){
+        localStorage.clear();
+        history.push("/")
+      }
+    }
+    checkRole();
+  }, []);
 
   const update = () => {
     const url = `http://localhost:8080/api/employee/${reactData}?firstName=${user.firstName}&lastName=${user.lastName}&middleName=${user.middleName}&email=${user.email}`;
 fetch(url, {
 method: "PUT",
 headers: {
-  "Authorization": "bearer " + reactData
+  "Authorization": "Bearer " + reactData
 }
     }).then((res) => 
         {
