@@ -49,7 +49,7 @@ export default function UserLoginPage() {
                         localStorage.setItem("token", data.token)
                         localStorage.setItem("role", data.role)
                         setToken(data.token)
-                        history.push("/homePage")
+                        history.push("/StudentExamsPage")
                 }
                 })
             }
