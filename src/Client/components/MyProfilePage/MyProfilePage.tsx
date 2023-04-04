@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { MainMenu, MainMenuItem } from "../MainMenu/MainMenu";
 import "./MyProfilePage.css";
 import { faCheck, faPen } from "@fortawesome/free-solid-svg-icons";
-import { Link, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 
 const menuItems = [
   new MainMenuItem("Home", "/homePage/"),
@@ -26,6 +26,10 @@ export default function MyProfilePage() {
     createdAt: "",
     employeeCategory: ""
     });
+
+    function LogOut(){
+      localStorage.clear();
+    }
 
 
   const [isLoading, setIsLoading] = useState(true);
@@ -88,7 +92,16 @@ headers: {
   
     return (
       <>
-        <MainMenu items={menuItems}></MainMenu>
+        <nav className="navbar">
+        <ul className="nav-links">
+          <li className="nav-link">
+            <NavLink to="/homePage">Home Page</NavLink>
+          </li>
+          <li className="nav-link">
+            <NavLink to="/" onClick={LogOut}>Log out</NavLink>
+          </li>
+        </ul>
+      </nav>
 
         <Form.Label className="labelmyprofilePage">
           My Profile

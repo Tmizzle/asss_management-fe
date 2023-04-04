@@ -6,6 +6,8 @@ import UserLoginPage from "../UserLoginPage/UserLoginPage";
 import PrivateRoute from "./PrivateRoute";
 import StudentFinancesPage from "../StudentFinancesPage/StudentFinancesPage";
 import StudentExamsPage from "../StudentHomePage/StudentExamPage";
+import StudentProfilePage from "../StudentProfilePage/StudentProfilePage";
+import AddNewStudentPage from "../AddNewStudentPage/AddNewStudentPage";
 
 
 function Router() {
@@ -22,6 +24,8 @@ function Router() {
                     <PrivateRoute exact path="/MyProfilePage" component={ MyProfilePage }  />
                     <PrivateRoute exact path="/StudentFinancesPage" component={ StudentFinancesPage }  />
                     <PrivateRoute exact path="/StudentExamsPage" component={ StudentExamsPage }  />
+                    <PrivateRoute exact path="/StudentProfilePage" component={ StudentProfilePage }  />
+                    <PrivateRoute exact path="/AddNewStudentPage" component={ AddNewStudentPage }  />
                     </Switch>
             </HashRouter>
         </>

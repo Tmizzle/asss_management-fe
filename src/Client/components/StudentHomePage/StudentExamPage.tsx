@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./StudentExamsPage.css";
 
 const StudentExamsPage: React.FC = () => {
@@ -12,6 +12,7 @@ const StudentExamsPage: React.FC = () => {
     const [subjects, setSubjects] = useState<any[]>([])
     const [submit, setSubmit] = useState<any[]>([])
     const [eventInfo, setEventInfo] = useState<any[]>([])
+    const history = useHistory()
 
     const handleProfessorChange = (event : React.ChangeEvent<HTMLSelectElement>) => {
         setProfessor(event.target.value);
@@ -28,6 +29,10 @@ const StudentExamsPage: React.FC = () => {
       const handleSubjectCancelChange = (event : React.ChangeEvent<HTMLSelectElement>) => {
         setSubjectCancel(event.target.value);
       };
+
+    function LogOut(){
+      localStorage.clear();
+    }
 
 
     const url = `http://localhost:8080/api/employee/getProfessors/`;
@@ -102,7 +107,6 @@ const StudentExamsPage: React.FC = () => {
 
       const url3 = `http://localhost:8080/api/exams/?token=${reactData}&profesorID=${professor}&subjectID=${subjectRegister}`;
         const SubmitExam = () => {
-            console.log(professor)
           fetch(url3, {
             method: 'POST',
             headers: {
@@ -116,6 +120,16 @@ const StudentExamsPage: React.FC = () => {
                         console.log(error);
                       });
                     }
+                    useEffect(() => {
+                      const checkRole = async () => {
+                        const role = localStorage.getItem("role");
+                        if (role !== "[STUDENT]"){
+                          localStorage.clear();
+                          history.push("/")
+                        }
+                      }
+                      checkRole();
+                    }, []);
 
 
   return (
@@ -128,10 +142,13 @@ const StudentExamsPage: React.FC = () => {
           <li className="nav-link">
             <NavLink to="/StudentProfilePage">My Profile</NavLink>
           </li>
+          <li className="nav-link">
+            <NavLink to="/" onClick={LogOut}>Log out</NavLink>
+          </li>
         </ul>
       </nav>
-      <div className="card-container">
-        <div className="card">
+      <div className="card-container" id="cardContainer">
+        <div className="card" id="StudentExamCard">
           <h2 className="card-title">Exam Registration</h2>
           <div className="card-content">
             <div className="form-group">
@@ -152,10 +169,10 @@ const StudentExamsPage: React.FC = () => {
         ))}
       </select>
             </div>
-            <button className="button" onClick={ () => SubmitExam() }>Register</button>
+            <button className="button" id="StudentExamButton" onClick={ () => SubmitExam() }>Register</button>
           </div>
         </div>
-        <div className="card">
+        <div className="card" id="StudentExamCard">
           <h2 className="card-title">Exam Cancellation</h2>
           <div className="card-content">
             <div className="form-group">
@@ -176,7 +193,7 @@ const StudentExamsPage: React.FC = () => {
         ))}
               </select>
             </div>
-            <button className="button" onClick={ () => RemoveExam() }>Cancel</button>
+            <button className="button" id="StudentExamButton" onClick={ () => RemoveExam() }>Cancel</button>
           </div>
         </div>
       </div>

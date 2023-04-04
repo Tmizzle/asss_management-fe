@@ -24,7 +24,7 @@
   }
   
   /* Cards styles */
-  .card-container {
+  #cardContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -32,7 +32,7 @@
     margin-top: 50px;
   }
   
-  .card {
+  #StudentExamCard {
     background-color: #fff;
     border-radius: 20px;
     padding: 20px;
@@ -53,7 +53,7 @@
     border-radius: 10px;
   }
   
-  .card button {
+  #StudentExamButton {
     display: block;
     margin: 20px auto;
     background-color: #6fa2ff;

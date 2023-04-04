@@ -62,10 +62,10 @@ export default function UserLoginPage() {
 
 
     return(
-        <Container>
-            <Card className="loginCard">
+        <Container id='LoginContainer'>
+            <Card className="loginCard" id='loginCard'>
                 <Col lg="8" md="8" sm="8">
-                <Card.Body>
+                <Card.Body id='LoginCardBody'>
                     <Card.Title className="logintitleForm">
                         <FontAwesomeIcon icon ={ faArrowAltCircleRight } /> User Login
                     </Card.Title>
@@ -77,7 +77,7 @@ export default function UserLoginPage() {
                                             value={ email }
                                             onChange= { event => setEmail(event.target.value) }/>
                             </Form.Group>
-                            <Form.Group className="logintextForm" style={{ marginBottom:"20px" }}>
+                            <Form.Group className="logintextForm" id='LoginFormGroup'>
                                 <Form.Label ClassName="textField" htmlFOr="password">Password:</Form.Label>
                                 <Form.Control type="password" id="password"
                                 value={ password }
@@ -86,11 +86,11 @@ export default function UserLoginPage() {
 
                             <Link to="/">Forgot your password?</Link>
 
-                            <Form.Group className="loginbuttonForm">
-                                <Button className="btn" variant="primary"  style={{ borderRadius:"20px", width:"100px", marginRight:"5px", fontSize:"14px" }}
+                            <Form.Group className="loginbuttonForm" id='LoginFormGroup'>
+                                <Button className="btn" variant="primary" 
                                 onClick={ () => doLogin() }>
                                     Login</Button>
-                                    <Button  className="btn" variant="primary" style={{ borderRadius:"20px", width:"100px", fontSize:"10px" }} onClick={ () => PushToReg() }>
+                                    <Button  className="btn" variant="primary" onClick={ () => PushToReg() }>
                                 
                                     Register</Button>
                             </Form.Group>

@@ -1,0 +1,85 @@
+#NewStudentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .add-new-student-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #NewStudentFormGroup {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    max-width: 900px;
+    width: 100%;
+    height: fit-content;
+    margin-top: 10px;
+  }
+  #NewStudentFormGroup label {
+    font-weight: bold;
+  }
+  
+  #NewStudentFormGroup .form-group {
+    margin-bottom: 30px;
+  }
+  
+  #NewStudentFormGroup .form-control {
+    border-radius: 10px;
+    box-shadow: none;
+  }
+  
+  #NewStudentFormGroup .form-control:focus {
+    box-shadow: none;
+    border-color: #3498db;
+  }
+
+  #button{
+    border-radius: 10px;
+    background-color: #3498db;
+    border-color: #3498db;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    margin: 0 auto;
+    width: 10rem;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  .datepicker-wrapper {
+    position: relative;
+  }
+  
+  .datepicker-wrapper .react-datepicker {
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .datepicker-wrapper .react-datepicker__input-container input {
+    border-radius: 10px;
+    box-shadow: none;
+  }
+  
+  .datepicker-wrapper .react-datepicker__input-container input:focus {
+    box-shadow: none;
+    border-color: #3498db;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .card {
+      width: 800px;
+    }
+  
+    .card .form-group {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './StudentFinancesPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 interface FinancesData {
   note: string;
@@ -13,6 +13,7 @@ interface FinancesData {
 export default function StudentFinancesPage() {
     const reactData = localStorage.getItem("token");
     const [data, setData] = useState<any[]>([])
+    const history = useHistory()
 
     useEffect(() => {
         const url = `http://localhost:8080/api/finances/forStudent/${reactData}`;
@@ -30,6 +31,16 @@ export default function StudentFinancesPage() {
                       });
                     }
         fetchUser();
+      }, []);
+      useEffect(() => {
+        const checkRole = async () => {
+          const role = localStorage.getItem("role");
+          if (role !== "[STUDENT]"){
+            localStorage.clear();
+            history.push("/")
+          }
+        }
+        checkRole();
       }, []);
 
   return (
