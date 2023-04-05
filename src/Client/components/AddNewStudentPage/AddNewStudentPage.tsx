@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './AddNewStudentPage.css';
 import { Link, NavLink, useHistory } from 'react-router-dom';
+import Popup from "../../PopUpWindow/Popup";
 
 export default function MyProfilePage() {
   const [firstName, setFirstName] = useState('');
@@ -17,6 +18,12 @@ export default function MyProfilePage() {
   const [course, setCourse] = useState('');
   const [budget, setBudget] = useState('');
   const [birthDate, setBirthDate] = useState<Date | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
 
   const reactData = [localStorage.getItem("token")];
   const [ data, setData] = useState<any[]>([]);
@@ -52,6 +59,8 @@ export default function MyProfilePage() {
       console.log(actualData);
       setData(actualData as any);
       console.log(data);
+      setPopupMessage(actualData.message);
+      setShowPopup(true);
     })
     .catch((err) => {
       console.log(err.message);
@@ -225,6 +234,9 @@ export default function MyProfilePage() {
 
 
           <Button type="submit" id="button" onClick={SendData}>Submit</Button>
+          {showPopup && (
+        <Popup handleClose={handlePopupClose} popupMessage={popupMessage} />
+      )}
         </Form>
       </Container>
     </div>

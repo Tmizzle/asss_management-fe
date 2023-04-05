@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import "./StudentExamsPage.css";
+import Popup from "../../PopUpWindow/Popup";
 
 const StudentExamsPage: React.FC = () => {
     const [professor, setProfessor] = useState("");
@@ -13,6 +14,8 @@ const StudentExamsPage: React.FC = () => {
     const [submit, setSubmit] = useState<any[]>([])
     const [eventInfo, setEventInfo] = useState<any[]>([])
     const history = useHistory()
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
 
     const handleProfessorChange = (event : React.ChangeEvent<HTMLSelectElement>) => {
         setProfessor(event.target.value);
@@ -33,6 +36,9 @@ const StudentExamsPage: React.FC = () => {
     function LogOut(){
       localStorage.clear();
     }
+    const handlePopupClose = () => {
+      setShowPopup(false);
+    };
 
 
     const url = `http://localhost:8080/api/employee/getProfessors/`;
@@ -71,7 +77,7 @@ const StudentExamsPage: React.FC = () => {
                   fetchSubjects();
       }, []);
 
-      const url4 = `http://localhost:8080/api/events`;
+      const url4 = `http://localhost:8080/api/events/examPeriods`;
       useEffect(() => {
         const fetchEvents = async () => {
             fetch(url4, {
@@ -100,6 +106,8 @@ const StudentExamsPage: React.FC = () => {
                             .then((submitData) => {
                             console.log(submitData);
                             setSubmit(submitData);
+                            setPopupMessage(submitData.message);
+                            setShowPopup(true);
                           }).catch(error => {
                                     console.log(error);
                                   });
@@ -116,8 +124,12 @@ const StudentExamsPage: React.FC = () => {
                 .then((submitData) => {
                 console.log(submitData);
                 setSubmit(submitData);
+                setPopupMessage(submitData.message);
+                setShowPopup(true);
               }).catch(error => {
                         console.log(error);
+                        setPopupMessage(error.message);
+                        setShowPopup(true);
                       });
                     }
                     useEffect(() => {
@@ -194,6 +206,9 @@ const StudentExamsPage: React.FC = () => {
               </select>
             </div>
             <button className="button" id="StudentExamButton" onClick={ () => RemoveExam() }>Cancel</button>
+            {showPopup && (
+        <Popup handleClose={handlePopupClose} popupMessage={popupMessage} />
+      )}
           </div>
         </div>
       </div>

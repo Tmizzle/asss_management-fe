@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import "./ExamStatusPage.css";
+import Popup from "../../PopUpWindow/Popup";
 
 const ExamStatusPage: React.FC = () => {
     const reactData = localStorage.getItem("token");
@@ -16,6 +17,12 @@ const ExamStatusPage: React.FC = () => {
     const [eventPassed, setEventPassed] = useState("");
     const [examPoints, setExamPoints] = useState("");
     const [indexPass, setIndexPass] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
+
+    const handlePopupClose = () => {
+      setShowPopup(false);
+    };
 
       const handleSubjectIdChange = (event : React.ChangeEvent<HTMLSelectElement>) => {
         setSubjectID(event.target.value);
@@ -57,15 +64,16 @@ const ExamStatusPage: React.FC = () => {
                 headers: {
                   "Authorization": "Bearer " + reactData
                 }
-                    }).then((res) => 
-                        {
-                            console.log(res);
-                            if(res.status === 200){
-                                console.log("Update successful")
-                        }
+                    }).then((response) => response.json())
+                    .then((actualData) => {
+                            console.log(actualData);
+                            setPopupMessage(actualData.message);
+                            setShowPopup(true);
                         })
                         .catch(error => {
                             console.log(error);
+                            setPopupMessage(error.message);
+                            setShowPopup(true);
                           });
                         }
 
@@ -76,15 +84,16 @@ const ExamStatusPage: React.FC = () => {
                         headers: {
                           "Authorization": "Bearer " + reactData
                         }
-                            }).then((res) => 
-                                {
-                                    console.log(res);
-                                    if(res.status === 200){
-                                        console.log("Update successful")
-                                }
+                            }).then((response) => response.json())
+                            .then((actualData) => {
+                                    console.log(actualData);
+                                    setPopupMessage(actualData.message);
+                                    setShowPopup(true);
                                 })
                                 .catch(error => {
                                     console.log(error);
+                                    setPopupMessage(error.message);
+                                    setShowPopup(true);
                                   });
                                 }
                         const url1 = `http://localhost:8080/api/events/examPeriods`;
@@ -188,6 +197,9 @@ const ExamStatusPage: React.FC = () => {
                   </select>
                 </div>
                 <button className="button" id="StudentExamButton" onClick={updateExam}>Cancel</button>
+                {showPopup && (
+        <Popup handleClose={handlePopupClose} popupMessage={popupMessage} />
+      )}
               </div>
             </div>
           </div>

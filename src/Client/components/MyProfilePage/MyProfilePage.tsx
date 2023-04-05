@@ -5,6 +5,7 @@ import { MainMenu, MainMenuItem } from "../MainMenu/MainMenu";
 import "./MyProfilePage.css";
 import { faCheck, faPen } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useHistory } from 'react-router-dom';
+import Popup from "../../PopUpWindow/Popup";
 
 const menuItems = [
   new MainMenuItem("Home", "/homePage/"),
@@ -14,6 +15,12 @@ export default function MyProfilePage() {
   const reactData = localStorage.getItem("token");
   const [isDisabled, setIsDisabled] = useState(true);
   const history = useHistory()
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+
+  const handlePopupClose = () => {
+      setShowPopup(false);
+    };
   
   const [user, setUser] = useState({id: 0,
     firstName: "",
@@ -70,10 +77,10 @@ headers: {
 }
     }).then((res) => 
         {
-            console.log(res);
             if(res.status === 200){
-                console.log("Update successful")
-                setIsDisabled(true);
+              setPopupMessage("Uspesno promenjeno!");
+              setShowPopup(true);
+              setIsDisabled(true);
         }
         })
         .catch(error => {
@@ -92,16 +99,7 @@ headers: {
   
     return (
       <>
-        <nav className="navbar">
-        <ul className="nav-links">
-          <li className="nav-link">
-            <NavLink to="/homePage">Home Page</NavLink>
-          </li>
-          <li className="nav-link">
-            <NavLink to="/" onClick={LogOut}>Log out</NavLink>
-          </li>
-        </ul>
-      </nav>
+        <MainMenu items={menuItems}></MainMenu>
 
         <Form.Label className="labelmyprofilePage">
           My Profile
@@ -129,6 +127,9 @@ headers: {
                   Personal info
                   <FontAwesomeIcon className="pen" icon={faPen} onClick={handleClick} />
                   <FontAwesomeIcon className="check" icon={faCheck} onClick={ () => update() } />
+                  {showPopup && (
+        <Popup handleClose={handlePopupClose} popupMessage={popupMessage} />
+      )}
                 </Form.Label>
                 <Form.Group>
                   <Form.Label htmlFor="firstName" className="myprofilelabelForm">
@@ -137,7 +138,7 @@ headers: {
 
                   <Form.Control 
                   className="controlmyprofileForm"
-                  disabled={isDisabled}
+                  disabled={true}
                   type="text"
                   id="firstName"
                   value={user.firstName}
@@ -167,7 +168,7 @@ headers: {
 
                   <Form.Control 
                   className="controlmyprofileForm"
-                  disabled={isDisabled}
+                  disabled={true}
                   type="text"
                   id="middleName"
                   value={user.middleName}

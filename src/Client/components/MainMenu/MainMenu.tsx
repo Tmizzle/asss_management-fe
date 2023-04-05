@@ -49,11 +49,10 @@ export class MainMenu extends React.Component<MainMenuProperties> {
     }
     render() {
         return(
-          <Nav className='navBar' variant="tabs">
+          <Nav className='navBar' id='navBar' variant="tabs">
             <HashRouter>
            {this.state.items.map(this.makeNavLink)}
            </HashRouter>
-           <FontAwesomeIcon className="logouticon" icon ={ faPersonRunning } onClick={ () => Logout() } />
           </Nav>
 
         );
@@ -61,9 +60,9 @@ export class MainMenu extends React.Component<MainMenuProperties> {
     private makeNavLink(item: MainMenuItem){
         
         return(
-            <div className='buttons'>
+            <div className='buttons' id='nav-linkMM'>
                 
-             <Link to= {item.link} className="nav-link">
+             <Link to= {item.link} className="nav-link" id='nav-linksMM'>
                 {item.text}
              </Link>
             </div>     

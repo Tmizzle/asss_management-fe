@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { useToken } from '../../context/TokenContext/TokenProvider';
 import { Link, useHistory } from 'react-router-dom';
+import Popup from "../../PopUpWindow/Popup";
 
 export default function UserLoginPage() {
     /* useStates pick up values from fields in our form */
@@ -13,11 +14,13 @@ export default function UserLoginPage() {
     const [password, setPassword] = useState("");
     const { setToken } = useToken();
     const history = useHistory()
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
 
+    const handlePopupClose = () => {
+        setShowPopup(false);
+      };
 
-    const PushToReg = () => {
-        history.push("/registration")
-    }
     /* doLogin sends body data to Backend function, converts it to json beforehand  */
     const doLogin = () => {
         const url = `http://localhost:8080/api/public/login/authenticate`;
@@ -55,7 +58,10 @@ export default function UserLoginPage() {
             }
             })
             .catch(error => {
+                console.log("test")
                 console.log(error);
+                setPopupMessage("Wrong information!");
+                setShowPopup(true);
               });
 
     }
@@ -90,9 +96,9 @@ export default function UserLoginPage() {
                                 <Button className="btn" variant="primary" 
                                 onClick={ () => doLogin() }>
                                     Login</Button>
-                                    <Button  className="btn" variant="primary" onClick={ () => PushToReg() }>
-                                
-                                    Register</Button>
+                                    {showPopup && (
+                                    <Popup handleClose={handlePopupClose} popupMessage={popupMessage} />
+                                    )}
                             </Form.Group>
 
                             
