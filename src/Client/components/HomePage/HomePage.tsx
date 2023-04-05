@@ -6,11 +6,8 @@ import './HomePage.css';
 
 const menuItems = [
     new MainMenuItem("My Profile", "/MyProfilePage"),
-    new MainMenuItem("Finances", "/StudentFinancesPage")
+    new MainMenuItem("Exams", "/ExamStatusPage")
   ];
-  function LogOut(){
-    localStorage.clear();
-  }
 
   export default function HomePage() {
     const reactData = localStorage.getItem("token");
@@ -85,22 +82,8 @@ const menuItems = [
           }, []);
     
         return (
-            <><nav className="navbar">
-            <ul className="nav-links">
-              <li className="nav-link">
-                <NavLink to="/MyProfilePage">My Profile</NavLink>
-              </li>
-              <li className="nav-link">
-                <NavLink to="/AddNewStudentPage">Add Student</NavLink>
-              </li>
-              <li className="nav-link">
-                <NavLink to="/ExamStatusPage">Exams</NavLink>
-              </li>
-              <li className="nav-link">
-                <NavLink to="/" onClick={LogOut}>Log out</NavLink>
-              </li>
-            </ul>
-          </nav>
+            <>
+            <MainMenu items={menuItems}></MainMenu>
 
           <div className="container" id="HomePageContainer">
       <div className="search-container">

@@ -8,6 +8,7 @@ import { Link, NavLink, useHistory } from 'react-router-dom';
 
 const menuItems = [
     new MainMenuItem("Home", "/StudentExamsPage/"),
+    new MainMenuItem("Finances", "/StudentFinancesPage/")
   ];
 
 export default function StudentProfilePage() {
@@ -67,16 +68,7 @@ export default function StudentProfilePage() {
     }, []);
       return (
         <>
-          <nav className="navbar">
-        <ul className="nav-links">
-          <li className="nav-link">
-            <Link to="/StudentFinancesPage">Finances</Link>
-          </li>
-          <li className="nav-link">
-            <Link to="/StudentExamsPage">Exam Page</Link>
-          </li>
-        </ul>
-      </nav>
+          <MainMenu items={menuItems}></MainMenu>
   
           <Form.Label className="labelmyprofilePage">
             My Profile

@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import "./StudentExamsPage.css";
 import Popup from "../../PopUpWindow/Popup";
+import { MainMenu, MainMenuItem } from '../MainMenu/MainMenu';
+
+const menuItems = [
+  new MainMenuItem("Finansije", "/StudentFinancesPage"),
+  new MainMenuItem("Moj profil", "/StudentProfilePage/"),
+];
 
 const StudentExamsPage: React.FC = () => {
     const [professor, setProfessor] = useState("");
@@ -146,19 +152,7 @@ const StudentExamsPage: React.FC = () => {
 
   return (
     <>
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li className="nav-link">
-            <NavLink to="/StudentFinancesPage">Finances</NavLink>
-          </li>
-          <li className="nav-link">
-            <NavLink to="/StudentProfilePage">My Profile</NavLink>
-          </li>
-          <li className="nav-link">
-            <NavLink to="/" onClick={LogOut}>Log out</NavLink>
-          </li>
-        </ul>
-      </nav>
+      <MainMenu items={menuItems}></MainMenu>
       <div className="card-container" id="cardContainer">
         <div className="card" id="StudentExamCard">
           <h2 className="card-title">Exam Registration</h2>

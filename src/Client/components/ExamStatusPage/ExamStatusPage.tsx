@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import "./ExamStatusPage.css";
 import Popup from "../../PopUpWindow/Popup";
+import { MainMenu, MainMenuItem } from '../MainMenu/MainMenu';
+
+const menuItems = [
+  new MainMenuItem("Home", "/homePage/"),
+  new MainMenuItem("My Profile", "/MyProfilePage")
+];
 
 const ExamStatusPage: React.FC = () => {
     const reactData = localStorage.getItem("token");
@@ -116,19 +122,8 @@ const ExamStatusPage: React.FC = () => {
 
     return (
         <>
-          <nav className="navbar">
-            <ul className="nav-links">
-              <li className="nav-link">
-                <NavLink to="/homePage">Home Page</NavLink>
-              </li>
-              <li className="nav-link">
-                <NavLink to="/MyProfilePage">My Profile</NavLink>
-              </li>
-              <li className="nav-link">
-                <NavLink to="/" onClick={LogOut}>Log out</NavLink>
-              </li>
-            </ul>
-          </nav>
+          <MainMenu items={menuItems}></MainMenu>
+          
           <div className="card-container" id="cardContainerExamStatus">
             <div className="card" id="CardExamStatus">
               <h2 className="card-title">Update colloquium information</h2>

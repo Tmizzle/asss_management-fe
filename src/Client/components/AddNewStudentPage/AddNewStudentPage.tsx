@@ -5,6 +5,11 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './AddNewStudentPage.css';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import Popup from "../../PopUpWindow/Popup";
+import { MainMenu, MainMenuItem } from '../MainMenu/MainMenu';
+
+const menuItems = [
+  new MainMenuItem("Placeholder", ""),
+];
 
 export default function MyProfilePage() {
   const [firstName, setFirstName] = useState('');
@@ -67,15 +72,13 @@ export default function MyProfilePage() {
     });
 }
 
-  return (
+  return (<>
+
+    <MainMenu items={menuItems}></MainMenu>
+
+    
     <div className="add-new-student-page">
-    <nav className="navbar">
-        <ul className="nav-links">
-          <li className="nav-link">
-            <NavLink to="/homePage">Home Page</NavLink>
-          </li>
-        </ul>
-      </nav>
+  
       <h1 className="text-center my-4">Add New Student Form</h1>
       <Container id='NewStudentContainer'>
         <Form onSubmit={handleSubmit}>
@@ -240,5 +243,6 @@ export default function MyProfilePage() {
         </Form>
       </Container>
     </div>
+    </>
   );
 };

@@ -53,6 +53,11 @@ export class MainMenu extends React.Component<MainMenuProperties> {
             <HashRouter>
            {this.state.items.map(this.makeNavLink)}
            </HashRouter>
+           <div className='buttons' id='nav-linkMM'>
+           <Link to= "/" className="nav-link" id='nav-linksMM' onClick={Logout}>
+                Izloguj se
+             </Link>
+            </div>
           </Nav>
 
         );

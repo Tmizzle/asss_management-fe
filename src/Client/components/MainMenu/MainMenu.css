@@ -89,3 +89,8 @@
     background-color: #818182;
     color: white;
   }
+  .nav-tabs{
+    background-color: white;
+    justify-content: center;
+    display: flex;
+}

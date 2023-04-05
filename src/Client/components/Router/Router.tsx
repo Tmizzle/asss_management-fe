@@ -9,6 +9,7 @@ import StudentProfilePage from "../StudentProfilePage/StudentProfilePage";
 import AddNewStudentPage from "../AddNewStudentPage/AddNewStudentPage";
 import HomePage from "../HomePage/HomePage";
 import ExamStatusPage from "../ExamStatusPage/ExamStatusPage";
+import HrHomePage from "../HrHomePage/HrHomePage";
 
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
                     <PrivateRoute exact path="/StudentProfilePage" component={ StudentProfilePage }  />
                     <PrivateRoute exact path="/AddNewStudentPage" component={ AddNewStudentPage }  />
                     <PrivateRoute exact path="/ExamStatusPage" component={ ExamStatusPage }  />
+                    <PrivateRoute exact path="/HrHomePage" component={ HrHomePage }  />
                     </Switch>
             </HashRouter>
         </>

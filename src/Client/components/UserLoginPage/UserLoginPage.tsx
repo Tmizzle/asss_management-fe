@@ -54,6 +54,12 @@ export default function UserLoginPage() {
                         setToken(data.token)
                         history.push("/StudentExamsPage")
                 }
+                else if(data.role === "[HUMAN_RESOURCES]"){
+                localStorage.setItem("token", data.token)
+                    localStorage.setItem("role", data.role)
+                    setToken(data.token)
+                    history.push("/HrHomePage")
+                }
                 })
             }
             })
